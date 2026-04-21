@@ -12,7 +12,7 @@ export function printHelp(): void {
     "More commands (login, deploy, logs, env, secrets, domains, scale,",
     "rollback, status, projects) will land as chimpbase/cloud's API stabilizes.",
     "",
-    "Docs: https://chimpbase.app/docs/cli",
+    "Docs: https://chimpbase.dev/cli",
   ];
   console.log(lines.join("\n"));
 }

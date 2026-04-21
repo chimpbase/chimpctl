@@ -1,6 +1,6 @@
 # chimpctl
 
-Customer CLI for [Chimpbase Cloud](https://chimpbase.app).
+Customer CLI for [Chimpbase Cloud](https://chimpbase.dev).
 
 ## Install
 
@@ -8,7 +8,7 @@ Single-binary (recommended):
 
 ```
 # macOS (Apple Silicon)
-curl -fsSL https://chimpbase.app/install.sh | sh
+curl -fsSL https://chimpbase.dev/install.sh | sh
 
 # Or download from GitHub Releases:
 # https://github.com/chimpbase/chimpctl/releases
