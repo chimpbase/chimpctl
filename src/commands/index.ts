@@ -1,30 +1,30 @@
+import { deploy } from "./deploy.ts";
 import { printHelp } from "./help.ts";
+import { login } from "./login.ts";
+import { logout } from "./logout.ts";
+import { projects } from "./projects.ts";
+import { services } from "./services.ts";
 import { printVersion } from "./version.ts";
+import { whoami } from "./whoami.ts";
 
-type Command = {
-  name: string;
-  description: string;
-  run: (args: string[]) => Promise<number> | number;
+type CommandFn = (args: string[]) => Promise<number> | number;
+
+const commands: Record<string, CommandFn> = {
+  help: () => {
+    printHelp();
+    return 0;
+  },
+  version: () => {
+    printVersion();
+    return 0;
+  },
+  login,
+  logout: () => logout(),
+  whoami: () => whoami(),
+  projects,
+  deploy,
+  services,
 };
-
-const commands: Command[] = [
-  {
-    name: "help",
-    description: "Show help",
-    run: () => {
-      printHelp();
-      return 0;
-    },
-  },
-  {
-    name: "version",
-    description: "Show chimpctl version",
-    run: () => {
-      printVersion();
-      return 0;
-    },
-  },
-];
 
 export async function run(argv: string[]): Promise<number> {
   const [first, ...rest] = argv;
@@ -38,13 +38,13 @@ export async function run(argv: string[]): Promise<number> {
     return 0;
   }
 
-  const cmd = commands.find((c) => c.name === first);
+  const cmd = commands[first];
   if (!cmd) {
     console.error(`unknown command: ${first}`);
     printHelp();
     return 1;
   }
-  return cmd.run(rest);
+  return await cmd(rest);
 }
 
 export { commands };
